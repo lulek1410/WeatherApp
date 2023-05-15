@@ -32,7 +32,6 @@ function DailyForecast() {
 				.then((response) => response.json())
 				.then((json) => {
 					let previousDay = new Date().toString().slice(0, 3);
-					console.log(previousDay);
 					const tempData = [];
 					let forecast = { day: "Today", weatherData: [] };
 					json.list.map((data) => {
@@ -40,7 +39,6 @@ function DailyForecast() {
 						const locationData = extractLocationData(data);
 						locationData.time = data.dt_txt.slice(11, -3);
 						forecast.weatherData.push(locationData);
-						console.log(day);
 						if (day !== previousDay) {
 							previousDay = day;
 							tempData.push(forecast);
@@ -55,7 +53,6 @@ function DailyForecast() {
 
 	useEffect(() => {
 		fetchTodaysData();
-		console.log("call daily");
 	}, [fetchTodaysData]);
 
 	return (

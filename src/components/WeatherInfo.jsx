@@ -99,7 +99,6 @@ function WeatherInfo(props) {
 				weatherData.timezone / 3600
 			);
 			if (newLocalTime != localTime) {
-				console.log("time uppdate");
 				setLocalTime(newLocalTime);
 			}
 		}, 2000);

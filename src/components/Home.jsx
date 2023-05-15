@@ -45,7 +45,6 @@ function Home() {
 	}, []);
 
 	useEffect(() => {
-		console.log("call");
 		fetchSuggestedLocationsData();
 	}, [fetchSuggestedLocationsData]);
 

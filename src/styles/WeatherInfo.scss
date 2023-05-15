@@ -1,0 +1,70 @@
+@mixin center-content($display) {
+	display: $display;
+	align-items: center;
+	justify-content: center;
+}
+
+.weather-info {
+	@include center-content(inline-flex);
+
+	background-color: rgba(245, 245, 245, 0.575);
+	flex-direction: column;
+	text-align: center;
+	padding: 1rem 1rem;
+	border-radius: 1.5rem;
+	user-select: none;
+
+	.fs-big,
+	.temperature {
+		font-size: 4em;
+	}
+
+	.temperature {
+		font-family: "Kollektif";
+		position: relative;
+	}
+
+	.temperature::after {
+		content: "\00b0";
+		position: absolute;
+		right: 10;
+	}
+
+	.description {
+		font-weight: 300;
+	}
+
+	p,
+	.fs-med {
+		font-size: 1.5em;
+	}
+
+	.weather-description {
+		margin-bottom: 1.2em;
+	}
+
+	.weather-image {
+		height: 9em;
+	}
+
+	.details-grid {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		column-gap: 2rem;
+		row-gap: 1rem;
+
+		p {
+			font-size: 1.2em;
+			@include center-content(flex);
+
+			&:last-child {
+				grid-column: 1 / 3;
+			}
+
+			& > img {
+				width: 2.3rem;
+				margin-right: 0.7rem;
+			}
+		}
+	}
+}

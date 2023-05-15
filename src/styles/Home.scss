@@ -1,0 +1,23 @@
+@use "mixins/ScrollContainer.scss" as container;
+@use "variables/Spacer" as spacer;
+
+.suggested-locations {
+	@include container.scroll-container(390px);
+}
+
+.local-weather {
+	font-size: 0.9rem;
+	display: flex;
+	justify-content: center;
+	margin-bottom: max(2vh, 20px);
+}
+
+@media (width < 1000px) {
+	.suggested-locations {
+		gap: spacer.$vertical-spacer;
+		grid-auto-flow: row;
+		justify-content: center;
+		grid-auto-columns: 80%;
+		height: 100%;
+	}
+}

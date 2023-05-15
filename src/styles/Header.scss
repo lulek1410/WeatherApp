@@ -1,0 +1,80 @@
+header {
+	$width: max(20vw, 170px);
+	$search-button-width: clamp(3rem, 5rem, 7rem);
+	$height: max(4vh, 40px);
+	$border-radius: 10px;
+
+	display: flex;
+	justify-content: space-between;
+	background-color: #00920c;
+	color: rgba(255, 255, 255, 0.87);
+
+	padding: 1.5vh 3vw 1.5vh 3vw;
+
+	.header-logo,
+	.input {
+		display: flex;
+		align-items: center;
+	}
+
+	.header-logo {
+		color: white;
+		text-decoration: none;
+		width: $width;
+		font-size: 1.25rem;
+		p {
+			margin-left: 1vw;
+			font-family: "Kollektif";
+		}
+	}
+
+	button {
+		border: none;
+		border-right: rgb(221, 221, 221) solid 1px;
+		background-color: white;
+		border-radius: $border-radius 0 0 $border-radius;
+		height: $height;
+		width: $search-button-width;
+		font-size: 1.2rem;
+		cursor: pointer;
+	}
+
+	.input {
+		outline: none;
+		border-radius: 0 $border-radius $border-radius 0;
+		padding: 0 0.5rem;
+		height: $height;
+		width: $width;
+	}
+
+	[data-reach-combobox] {
+		color: black;
+		position: relative;
+	}
+
+	[data-reach-combobox-input] {
+		outline: none;
+		border: none;
+		border-radius: 0 $border-radius $border-radius 0;
+		padding: 0 1rem;
+
+		font-size: 1.15rem;
+
+		height: $height;
+		width: calc($width - $search-button-width);
+	}
+
+	[data-reach-combobox-popover] {
+		border: #00920c solid 2px;
+		border-top: none;
+		position: absolute;
+		top: $height;
+		left: 0;
+		right: $border-radius;
+		padding: 0 0.5rem 0.5rem 0.5rem;
+	}
+
+	[data-reach-combobox-option] {
+		width: calc($width - $border-radius - 1rem - $search-button-width);
+	}
+}

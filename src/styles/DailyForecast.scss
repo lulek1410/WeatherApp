@@ -1,0 +1,39 @@
+@use "mixins/ScrollContainer.scss" as container;
+@use "variables/Spacer.scss" as spacer;
+
+$width: max(calc((94vw - 80px) / 9), 14em);
+$horizontal-margin: 3vw;
+
+.horizontal-container {
+	background-color: rgba(255, 255, 255, 0.575);
+	display: flex;
+	align-items: center;
+	margin-top: spacer.$vertical-spacer;
+	padding: 1vh 0 1vh 0;
+	border-radius: 10px;
+}
+
+.day {
+	text-align: center;
+	color: black;
+	width: max(55px, 6vw);
+	flex-shrink: 0;
+	font-size: 1.6em;
+	margin: 0 $horizontal-margin spacer.$vertical-spacer $horizontal-margin;
+}
+
+.forecast {
+	@include container.scroll-container($width);
+}
+
+.current-weather {
+	display: flex;
+	text-align: center;
+	width: 100%;
+}
+
+@media (width < 1000px) {
+	.current-weather {
+		flex-direction: column;
+	}
+}

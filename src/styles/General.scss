@@ -1,0 +1,29 @@
+@font-face {
+	font-family: "Kollektif";
+	src: url("../fonts/kollektif/Kollektif.ttf");
+}
+
+:root {
+	font-family: "Jost";
+	font-size: calc(7px + 0.556vw);
+	font-weight: 400;
+	line-height: 1.5;
+}
+
+* {
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	box-sizing: content-box;
+}
+
+main {
+	color: black;
+	flex: 1;
+	background-image: url("../assets/background.svg");
+	background-repeat: no-repeat;
+	background-size: cover;
+	padding: 3vh 3vw;
+}

@@ -12,7 +12,7 @@ function App() {
 		<>
 			<LocationProvider>
 				<div className="app-container">
-					<BrowserRouter basename="">
+					<BrowserRouter>
 						<Header></Header>
 						<Routes>
 							<Route exact path="/" element={<Home />} />

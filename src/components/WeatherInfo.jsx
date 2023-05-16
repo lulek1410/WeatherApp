@@ -115,7 +115,7 @@ function WeatherInfo(props) {
 					clickable
 						? () => {
 								navigate(`/forecast/${description}`);
-						  }
+							}
 						: undefined
 				}
 			>

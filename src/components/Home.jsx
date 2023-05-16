@@ -3,7 +3,6 @@ import "@/styles/Home.scss";
 import { useCallback, useEffect, useState } from "react";
 
 import WeatherInfo from "./WeatherInfo";
-import LocationData from "../scripts/structures/LocationData";
 import extractLocationData from "../scripts/ExtractLocationData";
 
 const suggestedLocations = {
@@ -31,7 +30,7 @@ function Home() {
 
 	const fetchSuggestedLocationsData = useCallback(() => {
 		fetch(
-			`http://api.openweathermap.org/data/2.5/group?id=${suggestedLocations.ids.toString()}&units=metric&lang=en&appid=71f59a10032e07b22e7a6492250eb24d`
+			`https://api.openweathermap.org/data/2.5/group?id=${suggestedLocations.ids.toString()}&units=metric&lang=en&appid=71f59a10032e07b22e7a6492250eb24d`
 		)
 			.then((response) => response.json())
 			.then((json) => {

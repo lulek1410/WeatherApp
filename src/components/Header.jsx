@@ -18,7 +18,7 @@ import { Link, useNavigate } from "react-router-dom";
 
 function Header() {
 	const { setLocation } = useContext(LocationContext);
-	
+
 	const navigate = useNavigate();
 
 	const {
@@ -58,8 +58,8 @@ function Header() {
 					<p>WeatherApp</p>
 				</Link>
 				<div className="input">
-					<button onClick={searchLocation}>
-						<FontAwesomeIcon icon={faMagnifyingGlass} className="search-icon" />
+					<button onClick={searchLocation} name="search">
+						<FontAwesomeIcon icon={faMagnifyingGlass} />
 					</button>
 					<Combobox onSelect={handleSelect}>
 						<ComboboxInput

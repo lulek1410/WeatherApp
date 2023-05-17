@@ -136,9 +136,11 @@ function WeatherInfo(props) {
 					alt="weather image"
 					className="weather-image"
 				/>
-				<p className="weather-description fs-med">
-					{weatherData.weather.description}
-				</p>
+				{showFullInfo && (
+					<p className="weather-description fs-med">
+						{weatherData.weather.description}
+					</p>
+				)}
 				{showFullInfo && (
 					<div className="details-grid">
 						<p>

@@ -1,7 +1,7 @@
 import "@/styles/Loading.scss";
 
-function LoadingAnimation(props) {
-	const { circleRadius = 15 } = props;
+function LoadingAnimation() {
+	const circleRadius = 15;
 	return (
 		<>
 			<svg width={circleRadius * 8 + 3 * 5} height={circleRadius * 2}>

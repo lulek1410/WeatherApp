@@ -3,9 +3,11 @@
 
 .suggested-locations {
 	@include container.scroll-container(24rem);
+	font-size: 1rem;
 }
 
 .local-weather {
+	font-size: 1rem;
 	display: flex;
 	justify-content: center;
 	align-items: center;

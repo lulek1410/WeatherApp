@@ -14,11 +14,11 @@ const suggestedLocations = {
 	cityName: [
 		"London, UK",
 		"Moscow, Russia",
-		"New York, NY, USA",
+		"New York, USA",
 		"Berlin, Germany",
 		"Beijing, China",
 		"Tokyo, Japan",
-		"New Delhi, Delhi, India",
+		"New Delhi, India",
 		"Pretoria, South Africa",
 		"Buenos Aires, Argentina",
 		"Oslo, Norway",
@@ -122,6 +122,7 @@ function Home() {
 							<WeatherInfo
 								description={locationData.cityName}
 								weatherData={locationData}
+								showFullInfo={true}
 								clickable={true}
 							/>
 						</div>

@@ -6,7 +6,7 @@ header {
 
 	display: flex;
 	justify-content: space-between;
-	background-color: #00920c;
+	background-color: #006805;
 	color: rgba(255, 255, 255, 0.87);
 
 	padding: 1.5vh 3vw 1.5vh 3vw;
@@ -62,7 +62,6 @@ header {
 	}
 
 	[data-reach-combobox-popover] {
-		border: #00920c solid 2px;
 		border-top: none;
 		position: absolute;
 		top: $height;

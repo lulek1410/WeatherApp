@@ -109,6 +109,7 @@ function WeatherInfo(props) {
 	return (
 		<>
 			<div
+				role="weather information display"
 				className="weather-info"
 				style={{ cursor: clickable ? "pointer" : "auto" }}
 				onClick={

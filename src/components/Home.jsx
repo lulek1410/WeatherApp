@@ -4,6 +4,7 @@ import { useCallback, useEffect, useState } from "react";
 
 import WeatherInfo from "./WeatherInfo";
 import extractLocationData from "../scripts/ExtractLocationData";
+import LoadingScreen from "./LoadingScreen";
 
 const suggestedLocations = {
 	ids: [
@@ -113,27 +114,31 @@ function Home() {
 	return (
 		<>
 			<main>
-				{locationData && (
-					<div className="local-weather">
-						<WeatherInfo
-							description={locationData.cityName}
-							weatherData={locationData}
-							clickable={true}
-						/>
-					</div>
-				)}
-				{suggestedLocationsData && (
-					<div className="suggested-locations">
-						{suggestedLocationsData.map((data, index) => {
-							return (
-								<WeatherInfo
-									key={index}
-									description={suggestedLocations.cityName[index]}
-									weatherData={data}
-									clickable={true}
-								/>
-							);
-						})}
+				{!locationData || !suggestedLocationsData ? (
+					<LoadingScreen />
+				) : (
+					<div>
+						<div className="local-weather">
+							<WeatherInfo
+								description={locationData.cityName}
+								weatherData={locationData}
+								clickable={true}
+							/>
+						</div>
+						<div>
+							<div className="suggested-locations">
+								{suggestedLocationsData.map((data, index) => {
+									return (
+										<WeatherInfo
+											key={index}
+											description={suggestedLocations.cityName[index]}
+											weatherData={data}
+											clickable={true}
+										/>
+									);
+								})}
+							</div>
+						</div>
 					</div>
 				)}
 			</main>

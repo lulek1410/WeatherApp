@@ -1,0 +1,45 @@
+@use "mixins/CenterContent.scss" as mixin;
+
+#logo {
+	display: flex;
+	gap: 1rem;
+	font-size: 3rem;
+}
+
+#loading-dots {
+	transform-box: fill-box;
+	transform-origin: center;
+	fill: rgb(0, 30, 100);
+	transform: scale(0.3);
+}
+
+.loading-container {
+	@include mixin.center-content(flex);
+	flex-direction: column;
+	height: 100%;
+	width: 100%;
+	color: white;
+}
+
+@for $i from 0 through 4 {
+	circle:nth-child(#{$i}) {
+		animation: growUp 3s ease-out forwards infinite;
+		animation-delay: #{$i * 200ms};
+	}
+}
+
+@keyframes growUp {
+	0%,
+	100% {
+		transform: scale(0.3);
+		fill: rgb(0, 30, 100);
+	}
+	40% {
+		transform: scale(1);
+		fill: rgb(0, 173, 226);
+	}
+	50% {
+		transform: scale(1);
+		fill: rgb(184, 181, 0);
+	}
+}

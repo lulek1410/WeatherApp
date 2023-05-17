@@ -8,11 +8,12 @@ import WeatherInfo from "./WeatherInfo";
 import LocationData from "../scripts/structures/LocationData";
 import extractLocationData from "../scripts/ExtractLocationData";
 import ReactMap from "./ReactMap";
+import LoadingScreen from "./LoadingScreen";
 
 function DailyForecast() {
 	const { cityName } = useParams();
 	let [locationData, setLocationData] = useState(LocationData());
-	let [dailyForecast, setDailyForecast] = useState([]);
+	let [dailyForecast, setDailyForecast] = useState(null);
 	let [locationPosition, setLocationPosition] = useState(null);
 
 	const fetchTodaysData = useCallback(() => {
@@ -58,34 +59,39 @@ function DailyForecast() {
 	return (
 		<>
 			<main>
-				<div className="current-weather">
-					<WeatherInfo
-						description={cityName}
-						weatherData={locationData}
-						showFullInfo={true}
-					></WeatherInfo>
-					{locationPosition && <ReactMap centerPosition={locationPosition} />}
-				</div>
-				{dailyForecast &&
-					dailyForecast.map((data, index) => {
-						return (
-							<div className="horizontal-container" key={index}>
-								<p className="day">{data.day}</p>
-								<div className="forecast">
-									{data.weatherData.map((hourData, index) => {
-										return (
-											<WeatherInfo
-												key={index}
-												showLocalTime={false}
-												weatherData={hourData}
-												description={hourData.time}
-											></WeatherInfo>
-										);
-									})}
+				{dailyForecast && locationPosition ? (
+					<div>
+						<div className="current-weather">
+							<WeatherInfo
+								description={cityName}
+								weatherData={locationData}
+								showFullInfo={true}
+							></WeatherInfo>
+							<ReactMap centerPosition={locationPosition} />
+						</div>
+						{dailyForecast.map((data, index) => {
+							return (
+								<div className="horizontal-container" key={index}>
+									<p className="day">{data.day}</p>
+									<div className="forecast">
+										{data.weatherData.map((hourData, index) => {
+											return (
+												<WeatherInfo
+													key={index}
+													showLocalTime={false}
+													weatherData={hourData}
+													description={hourData.time}
+												></WeatherInfo>
+											);
+										})}
+									</div>
 								</div>
-							</div>
-						);
-					})}
+							);
+						})}
+					</div>
+				) : (
+					<LoadingScreen />
+				)}
 			</main>
 		</>
 	);

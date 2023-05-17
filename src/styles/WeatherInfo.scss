@@ -1,11 +1,7 @@
-@mixin center-content($display) {
-	display: $display;
-	align-items: center;
-	justify-content: center;
-}
+@use "mixins/CenterContent.scss" as center;
 
 .weather-info {
-	@include center-content(inline-flex);
+	@include center.center-content(inline-flex);
 
 	background-color: rgba(245, 245, 245, 0.575);
 	flex-direction: column;
@@ -55,7 +51,7 @@
 
 		p {
 			font-size: 1.2em;
-			@include center-content(flex);
+			@include center.center-content(flex);
 
 			&:last-child {
 				grid-column: 1 / 3;

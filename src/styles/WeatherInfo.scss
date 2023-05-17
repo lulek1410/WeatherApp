@@ -6,13 +6,13 @@
 	background-color: rgba(245, 245, 245, 0.575);
 	flex-direction: column;
 	text-align: center;
-	padding: 1rem 1rem;
-	border-radius: 1.5rem;
+	padding: 0.5em 0.5em;
+	border-radius: 1.5em;
 	user-select: none;
 
 	.fs-big,
 	.temperature {
-		font-size: 4em;
+		font-size: 2.2em;
 	}
 
 	.temperature {
@@ -30,17 +30,16 @@
 		font-weight: 300;
 	}
 
-	p,
 	.fs-med {
-		font-size: 1.5em;
+		font-size: 1.2em;
 	}
 
 	.weather-description {
-		margin-bottom: 1.2em;
+		margin-bottom: 1em;
 	}
 
 	.weather-image {
-		height: 9em;
+		height: 7em;
 	}
 
 	.details-grid {
@@ -50,7 +49,6 @@
 		row-gap: 1rem;
 
 		p {
-			font-size: 1.2em;
 			@include center.center-content(flex);
 
 			&:last-child {

@@ -1,7 +1,6 @@
 @use "../variables/Spacer.scss" as spacer;
 
 @mixin scroll-container($column-size) {
-	font-size: 0.55em;
 	display: grid;
 	grid-auto-flow: column;
 	grid-auto-columns: $column-size;

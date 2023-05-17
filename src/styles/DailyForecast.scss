@@ -1,7 +1,7 @@
 @use "mixins/ScrollContainer.scss" as container;
 @use "variables/Spacer.scss" as spacer;
 
-$width: max(calc((94vw - 80px) / 9), 14em);
+$width: max(calc((94vw - 80px) / 10), 7.5em);
 $horizontal-margin: 3vw;
 
 .horizontal-container {
@@ -24,6 +24,7 @@ $horizontal-margin: 3vw;
 
 .forecast {
 	@include container.scroll-container($width);
+	font-size: 0.5rem;
 }
 
 .current-weather {

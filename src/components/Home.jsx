@@ -24,9 +24,29 @@ const suggestedLocations = {
 	],
 };
 
+const defaultLocation = {
+	id: 2988507,
+	cityName: "Paris, France",
+};
+
 function Home() {
 	let [suggestedLocationsData, setSuggestedLocationsData] = useState([]);
 	let [locationData, setLocationData] = useState(null);
+
+	const fetchSingleLocationsData = useCallback(
+		async (cityCallLink, cityName) => {
+			fetch(
+				`https://api.openweathermap.org/data/2.5/weather?${cityCallLink}&units=metric&lang=en&appid=71f59a10032e07b22e7a6492250eb24d`
+			)
+				.then((response) => response.json())
+				.then((json) => {
+					const locationData = extractLocationData(json);
+					locationData.cityName = cityName;
+					setLocationData(locationData);
+				});
+		},
+		[]
+	);
 
 	const fetchSuggestedLocationsData = useCallback(() => {
 		fetch(
@@ -47,34 +67,32 @@ function Home() {
 		fetchSuggestedLocationsData();
 	}, [fetchSuggestedLocationsData]);
 
-	const fetchCurrentLocationsData = useCallback(({ lat, lng }) => {
-		new window.google.maps.Geocoder()
-			.geocode({
-				location: { lat: lat, lng: lng },
-				language: "en",
-			})
-			.then((response) => {
-				const addres = response.results[0].formatted_address.split(" ");
-				const cityName = addres[3].slice(0, addres[3].length - 1);
-				let countryName = "";
-				let stateName = "";
-				if (addres.length > 5) {
-					countryName = addres[5];
-					stateName = addres[4];
-				} else {
-					countryName = addres[4];
-				}
-				fetch(
-					`https://api.openweathermap.org/data/2.5/weather?q=${cityName},${stateName},${countryName}&units=metric&lang=en&appid=71f59a10032e07b22e7a6492250eb24d`
-				)
-					.then((response) => response.json())
-					.then((json) => {
-						const locationData = extractLocationData(json);
-						locationData.cityName = `${cityName}, ${countryName}`;
-						setLocationData(locationData);
-					});
-			});
-	}, []);
+	const fetchCurrentLocationsData = useCallback(
+		({ lat, lng }) => {
+			new window.google.maps.Geocoder()
+				.geocode({
+					location: { lat: lat, lng: lng },
+					language: "en",
+				})
+				.then((response) => {
+					const addres = response.results[0].formatted_address.split(" ");
+					const cityName = addres[3].slice(0, addres[3].length - 1);
+					let countryName = "";
+					let stateName = "";
+					if (addres.length > 5) {
+						countryName = addres[5];
+						stateName = addres[4];
+					} else {
+						countryName = addres[4];
+					}
+					fetchSingleLocationsData(
+						`q=${cityName},${stateName},${countryName}`,
+						`${cityName},${countryName}`
+					);
+				});
+		},
+		[fetchSingleLocationsData]
+	);
 
 	useEffect(() => {
 		const showUsersLocationData = (position) => {
@@ -84,8 +102,13 @@ function Home() {
 				lng: coords.longitude,
 			});
 		};
-		navigator.geolocation.getCurrentPosition(showUsersLocationData, () => {});
-	}, [fetchCurrentLocationsData]);
+		navigator.geolocation.getCurrentPosition(showUsersLocationData, () => {
+			fetchSingleLocationsData(
+				`id=${defaultLocation.id}`,
+				defaultLocation.cityName
+			);
+		});
+	}, [fetchCurrentLocationsData, fetchSingleLocationsData]);
 
 	return (
 		<>

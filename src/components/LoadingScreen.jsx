@@ -7,7 +7,7 @@ import LoadingAnimation from "./LoadingAnimation";
 function LoadingScreen() {
 	return (
 		<>
-			<div className="loading-container">
+			<div id="loading-container">
 				<div id="logo">
 					<FontAwesomeIcon icon={faCloud} size="lg" />
 					<p>WeatherApp</p>

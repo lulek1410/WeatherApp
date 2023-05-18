@@ -11,7 +11,7 @@ function ReactMap(props) {
 	const setUpMap = useCallback(() => {
 		const map = new window.google.maps.Map(document.getElementById("map"), {
 			center: centerPosition,
-			zoom: 10,
+			zoom: 5,
 			disableDefaultUI: true,
 		});
 
@@ -23,8 +23,8 @@ function ReactMap(props) {
 			maxZoom: 9,
 			minZoom: 0,
 			name: "mymaptype",
+			opacity: 1,
 		});
-
 		map.overlayMapTypes.insertAt(0, myMapType);
 	}, [centerPosition, mapFilter]);
 

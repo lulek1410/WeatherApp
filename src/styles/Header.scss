@@ -74,6 +74,7 @@ header {
 	[data-reach-combobox-popover] {
 		border-top: none;
 		position: absolute;
+		z-index: 1;
 		top: $height;
 		left: 0;
 		right: $border-radius;

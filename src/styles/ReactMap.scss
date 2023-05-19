@@ -1,6 +1,8 @@
 @use "variables/Spacer" as spacer;
 
 .container {
+	-webkit-box-flex: 1;
+	-ms-flex: 1;
 	flex: 1;
 	width: 100%;
 	margin-left: spacer.$horizontal-spacer;
@@ -34,6 +36,8 @@
 
 @media (width < 1000px) {
 	.container {
+		-webkit-box-flex: 1;
+		-ms-flex: auto;
 		flex: auto;
 		height: 200px;
 		margin-top: spacer.$vertical-spacer;

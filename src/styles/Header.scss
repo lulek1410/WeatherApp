@@ -4,7 +4,13 @@ header {
 	$height: max(4vh, 40px);
 	$border-radius: 10px;
 
+	display: -webkit-box;
+
+	display: -ms-flexbox;
+
 	display: flex;
+	-webkit-box-pack: justify;
+	-ms-flex-pack: justify;
 	justify-content: space-between;
 	background-color: #006805;
 	color: rgba(255, 255, 255, 0.87);
@@ -13,7 +19,11 @@ header {
 
 	.header-logo,
 	.input {
+		display: -webkit-box;
+		display: -ms-flexbox;
 		display: flex;
+		-webkit-box-align: center;
+		-ms-flex-align: center;
 		align-items: center;
 	}
 

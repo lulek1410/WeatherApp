@@ -17,14 +17,20 @@
 }
 
 body {
+	-webkit-box-sizing: content-box;
 	box-sizing: content-box;
 }
 
 main {
 	color: black;
+	-webkit-box-flex: 1;
+	-ms-flex: 1;
 	flex: 1;
-	background-image: url("../assets/background.svg");
+	position: relative;
+	overflow-x: hidden;
+	padding: 1rem 3vw;
+	background-image: url("../assets/weather/sunny.jpg");
+	background-attachment: fixed;
 	background-repeat: no-repeat;
 	background-size: cover;
-	padding: 1rem 3vw;
 }

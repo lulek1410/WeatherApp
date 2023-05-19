@@ -58,7 +58,11 @@ function DailyForecast() {
 
 	return (
 		<>
-			<main>
+			<main
+				style={{
+					backgroundImage: locationData.weather.bgImage,
+				}}
+			>
 				{dailyForecast && locationPosition ? (
 					<div>
 						<div className="current-weather">

@@ -136,6 +136,7 @@ function WeatherInfo(props) {
 					src={weatherData.weather.icon}
 					alt="weather image"
 					className="weather-image"
+					loading="lazy"
 				/>
 				{showFullInfo && (
 					<p className="weather-description fs-med">
@@ -145,22 +146,27 @@ function WeatherInfo(props) {
 				{showFullInfo && (
 					<div className="details-grid">
 						<p>
-							<img src={pressureIcon} alt="Atmospheric pressure" />
+							<img
+								src={pressureIcon}
+								alt="Atmospheric pressure"
+								loading="lazy"
+							/>
 							{weatherData.pressure + " hPa"}
 						</p>
 						<p>
-							<img src={humidityIcon} alt="Humidity" />
+							<img src={humidityIcon} alt="Humidity" loading="lazy" />
 							{weatherData.humidity}
 							{String.fromCharCode(37)}
 						</p>
 						<p>
-							<img src={windSpeedIcon} alt="Wind speed" />
+							<img src={windSpeedIcon} alt="Wind speed" loading="lazy" />
 							{weatherData.wind.windSpeed + " m/s"}
 						</p>
 						<p>
 							<img
 								src={windDegreeIcon}
 								alt="Wind direction"
+								loading="lazy"
 								style={{
 									transform: `rotate(${weatherData.wind.windDegree - 270}deg)`,
 								}}
@@ -169,7 +175,7 @@ function WeatherInfo(props) {
 								" wind"}
 						</p>
 						<p>
-							<img src={visibilityIcon} alt="Visibility" />
+							<img src={visibilityIcon} alt="Visibility" loading="lazy" />
 							{weatherData.visibility + " m"}
 						</p>
 					</div>

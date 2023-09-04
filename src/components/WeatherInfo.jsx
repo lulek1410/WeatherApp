@@ -78,7 +78,7 @@ const getLocationTime = (userCurrentTime, locationOffsetHours) => {
 
 function WeatherInfo(props) {
 	const {
-		description,
+		title,
 		weatherData,
 		showFullInfo = false,
 		showLocalTime = true,
@@ -110,17 +110,17 @@ function WeatherInfo(props) {
 		<>
 			<div
 				role="weather information display"
-				className="weather-info"
+				className="weather-info glass"
 				style={{ cursor: clickable ? "pointer" : "auto" }}
 				onClick={
 					clickable
 						? () => {
-								navigate(`/forecast/${description}`);
-							}
+								navigate(`/forecast/${title}`);
+						  }
 						: undefined
 				}
 			>
-				<p className="fs-big description">{description}</p>
+				<p className="fs-big description">{title}</p>
 				{showLocalTime && (
 					<p>
 						Local time: <time>{localTime}</time>{" "}
@@ -186,7 +186,7 @@ function WeatherInfo(props) {
 }
 
 WeatherInfo.propTypes = {
-	description: PropTypes.string.isRequired,
+	title: PropTypes.string.isRequired,
 	weatherData: PropTypes.object.isRequired,
 	showFullInfo: PropTypes.bool,
 	showLocalTime: PropTypes.bool,

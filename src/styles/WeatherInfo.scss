@@ -3,7 +3,7 @@
 .weather-info {
 	@include center.center-content(inline-flex);
 
-	background-color: rgba(255, 218, 185, 0.5);
+	background-color: rgb(255, 224, 197);
 	-webkit-box-orient: vertical;
 	-webkit-box-direction: normal;
 	-ms-flex-direction: column;

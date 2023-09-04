@@ -29,8 +29,13 @@ main {
 	position: relative;
 	overflow-x: hidden;
 	padding: 1rem 3vw;
-	background-image: url("../assets/weather/sunny.jpg");
-	background-attachment: fixed;
-	background-repeat: no-repeat;
-	background-size: cover;
+	background: rgb(150, 180, 220);
+}
+
+.glass {
+	background: rgba(255, 255, 255, 0.45);
+	backdrop-filter: blur(5px);
+	-webkit-backdrop-filter: blur(5px);
+	border-radius: 10px;
+	border: 1px solid rgba(255, 255, 255, 0.18);
 }

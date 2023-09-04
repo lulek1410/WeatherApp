@@ -1,6 +1,6 @@
 header {
-	$width: max(20vw, 170px);
-	$search-button-width: clamp(3rem, 5rem, 7rem);
+	$width: max(25vw, 170px);
+	$search-button-width: clamp(3rem, 4rem, 5rem);
 	$height: max(4vh, 40px);
 	$border-radius: 10px;
 
@@ -13,7 +13,6 @@ header {
 	-ms-flex-pack: justify;
 	justify-content: space-between;
 	background-color: #006805;
-	color: rgba(255, 255, 255, 0.87);
 
 	padding: 1.5vh 3vw 1.5vh 3vw;
 
@@ -46,6 +45,7 @@ header {
 		height: $height;
 		width: $search-button-width;
 		font-size: 1.1rem;
+		z-index: 1;
 		cursor: pointer;
 	}
 
@@ -57,31 +57,14 @@ header {
 		width: $width;
 	}
 
-	[data-reach-combobox] {
-		color: black;
-		position: relative;
+	.geocoder-container {
+		width: 100%;
+		height: $height;
 	}
 
-	[data-reach-combobox-input] {
-		outline: none;
+	.geoapify-autocomplete-input {
+		height: $height;
 		border: none;
 		border-radius: 0 $border-radius $border-radius 0;
-		padding: 0 1rem;
-		height: $height;
-		width: calc($width - $search-button-width);
-	}
-
-	[data-reach-combobox-popover] {
-		border-top: none;
-		position: absolute;
-		z-index: 1;
-		top: $height;
-		left: 0;
-		right: $border-radius;
-		padding: 0 0.5rem 0.5rem 0.5rem;
-	}
-
-	[data-reach-combobox-option] {
-		width: calc($width - $border-radius - 1rem - $search-button-width);
 	}
 }

@@ -23,7 +23,7 @@ const suggestedLocations = {
 		{ lat: -34.6036844, lng: -58.3815591 },
 		{ lat: 59.9138688, lng: 10.7522454 },
 	],
-	cityName: [
+	lcationName: [
 		"London, UK",
 		"Moscow, Russia",
 		"New York, USA",
@@ -39,21 +39,21 @@ const suggestedLocations = {
 
 const defaultLocation = {
 	id: 2988507,
-	cityName: "Paris, France",
+	lcationName: "Paris, France",
 };
 
 function Home() {
 	let [suggestedLocationsData, setSuggestedLocationsData] = useState(null);
 	let [locationData, setLocationData] = useState(null);
 
-	const fetchSingleLocationsData = useCallback((cityCallLink, cityName) => {
+	const fetchSingleLocationsData = useCallback((cityCallLink, lcationName) => {
 		fetch(
 			`https://api.openweathermap.org/data/2.5/weather?${cityCallLink}&units=metric&lang=en&appid=71f59a10032e07b22e7a6492250eb24d`
 		)
 			.then((response) => response.json())
 			.then((json) => {
 				const locationData = extractLocationData(json);
-				locationData.cityName = cityName;
+				locationData.lcationName = lcationName;
 				setLocationData(locationData);
 			});
 	}, []);
@@ -83,25 +83,18 @@ function Home() {
 
 	const fetchCurrentLocationsData = useCallback(
 		({ lat, lng }) => {
-			new window.google.maps.Geocoder()
-				.geocode({
-					location: { lat: lat, lng: lng },
-					language: "en",
-				})
-				.then((response) => {
-					const addres = response.results[0].formatted_address.split(" ");
-					const cityName = addres[3].slice(0, addres[3].length - 1);
-					let countryName = "";
-					let stateName = "";
-					if (addres.length > 5) {
-						countryName = addres[5];
-						stateName = addres[4];
-					} else {
-						countryName = addres[4];
-					}
+			fetch(
+				`https://api.opencagedata.com/geocode/v1/json?q=${lat}+${lng}&key=${
+					import.meta.env.VITE_GEOCODING_API_KEY
+				}`
+			)
+				.then((response) => response.json())
+				.then((data) => {
+					const cityName = data.results[0].components.city;
+					let countryName = data.results[0].components.country;
 					fetchSingleLocationsData(
-						`q=${cityName},${stateName},${countryName}`,
-						`${cityName},${countryName}`
+						`q=${cityName},${countryName}`,
+						`${cityName}, ${countryName}`
 					);
 				});
 		},
@@ -119,7 +112,7 @@ function Home() {
 		navigator.geolocation.getCurrentPosition(showUsersLocationData, () => {
 			fetchSingleLocationsData(
 				`id=${defaultLocation.id}`,
-				defaultLocation.cityName
+				defaultLocation.lcationName
 			);
 		});
 	}, [fetchCurrentLocationsData, fetchSingleLocationsData]);
@@ -133,7 +126,7 @@ function Home() {
 					<div>
 						<div className="local-weather">
 							<WeatherInfo
-								description={locationData.cityName}
+								title={locationData.lcationName}
 								weatherData={locationData}
 								showFullInfo={true}
 								clickable={true}
@@ -145,7 +138,7 @@ function Home() {
 									return (
 										<WeatherInfo
 											key={index}
-											description={suggestedLocations.cityName[index]}
+											title={suggestedLocations.lcationName[index]}
 											weatherData={data}
 											clickable={true}
 										/>

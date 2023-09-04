@@ -1,57 +1,51 @@
 import "../styles/Header.scss";
+import "@geoapify/geocoder-autocomplete/styles/minimal.css";
 
 import { faCloud, faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useContext } from "react";
-import {
-	Combobox,
-	ComboboxInput,
-	ComboboxPopover,
-	ComboboxList,
-	ComboboxOption,
-} from "@reach/combobox";
-import "@reach/combobox/styles.css";
-import usePlacesAutocomplete from "use-places-autocomplete";
-
-import { LocationContext } from "../context/LocationContext";
+import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import {
+	GeoapifyContext,
+	GeoapifyGeocoderAutocomplete,
+} from "@geoapify/react-geocoder-autocomplete";
 
 function Header() {
-	const { setLocation } = useContext(LocationContext);
+	const [value, setValue] = useState("");
+	const [suggestions, setSuggestions] = useState([]);
 
 	const navigate = useNavigate();
 
-	const {
-		ready,
-		value,
-		suggestions: { status, data },
-		setValue,
-		clearSuggestions,
-	} = usePlacesAutocomplete({
-		requestOptions: {
-			types: ["(cities)"],
-		},
-	});
+	const handleSelect = (selected) => {
+		const city = selected.properties.city;
+		const country = selected.properties.country;
+		navigate(`/forecast/${city}, ${country}`);
+	};
+
+	function suggestionsFilter(suggestions) {
+		const unique = [];
+		suggestions.map((val) => {
+			const result = unique.map((el) => {
+				return el.bbox.toString() == val.bbox.toString();
+			});
+			const ans = result.some((e) => e == true);
+			if (ans) {
+				return true;
+			} else {
+				unique.push(val);
+				return false;
+			}
+		});
+
+		return unique;
+	}
 
 	const searchLocation = () => {
-		if (data[0]) {
-			handleSelect(data[0].description);
-		}
-	};
-
-	const handleSelect = (city) => {
-		setValue(city);
-		setLocation(city);
-		clearSuggestions();
-		navigate(`/forecast/${city}`);
-	};
-
-	const displySuggestions = () => {
-		return data[0] && data[0].description != value;
+		handleSelect(suggestions[0]);
 	};
 
 	return (
-		<>
+		<GeoapifyContext apiKey={import.meta.env.VITE_GEOAPIFY_KEY}>
 			<header>
 				<Link to="/" className="header-logo">
 					<FontAwesomeIcon icon={faCloud} size="lg" />
@@ -61,33 +55,24 @@ function Header() {
 					<button onClick={searchLocation} name="search">
 						<FontAwesomeIcon icon={faMagnifyingGlass} />
 					</button>
-					<Combobox onSelect={handleSelect}>
-						<ComboboxInput
-							value={value}
-							onChange={(e) => setValue(e.target.value)}
-							onKeyUp={(e) => {
-								if (e.key == "Enter") {
-									searchLocation();
-								}
-							}}
-							disabled={!ready}
-							placeholder="Search location"
-						/>
-						{displySuggestions() && (
-							<ComboboxPopover portal={false}>
-								<ComboboxList>
-									<hr />
-									{status === "OK" &&
-										data.map(({ place_id, description }) => (
-											<ComboboxOption key={place_id} value={description} />
-										))}
-								</ComboboxList>
-							</ComboboxPopover>
-						)}
-					</Combobox>
+					<GeoapifyGeocoderAutocomplete
+						value={value}
+						onUserInput={(val) => {
+							setValue(val);
+						}}
+						placeholder="Enter address here"
+						type={"city"}
+						limit={5}
+						lang="en"
+						placeSelect={handleSelect}
+						suggestionsChange={(val) => {
+							setSuggestions(val);
+						}}
+						suggestionsFilter={suggestionsFilter}
+					/>
 				</div>
 			</header>
-		</>
+		</GeoapifyContext>
 	);
 }
 

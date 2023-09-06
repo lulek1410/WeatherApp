@@ -1,5 +1,5 @@
 # WeatherApp
-Application used to check for weather in places around the world
+> Application used to check for weather in places around the world
 # Table of contents
 * [Basic information](#basic-information)
 * [Functionality](#functionality)
